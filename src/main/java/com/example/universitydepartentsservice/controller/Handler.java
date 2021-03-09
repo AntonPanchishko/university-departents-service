@@ -3,6 +3,7 @@ package com.example.universitydepartentsservice.controller;
 import com.example.universitydepartentsservice.controller.apphandler.CommandHandler;
 import com.example.universitydepartentsservice.controller.apphandler.DepartmentMenuHandler;
 import com.example.universitydepartentsservice.controller.apphandler.UnknownCommandHandler;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import lombok.Getter;
@@ -16,7 +17,19 @@ public class Handler {
 
     @Autowired
     public Handler(Map<String, CommandHandler> commandHandlerMap) {
-        this.commandHandlerMap = commandHandlerMap;
+        this.commandHandlerMap = new HashMap<>();
+        this.commandHandlerMap
+                .put("average", commandHandlerMap.get("averageSalaryHandler"));
+        this.commandHandlerMap
+                .put("statistic", commandHandlerMap.get("departmentStatisticCommandHandler"));
+        this.commandHandlerMap
+                .put("search", commandHandlerMap.get("globalSearchCommandHandler"));
+        this.commandHandlerMap
+                .put("head", commandHandlerMap.get("headOfDepartmentCommandHandler"));
+        this.commandHandlerMap
+                .put("amount", commandHandlerMap.get("professorAmountCommandHandler"));
+        this.commandHandlerMap
+                .put("exit", commandHandlerMap.get("exitProgramCommandHandler"));
     }
 
     public void run() {
